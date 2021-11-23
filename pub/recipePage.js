@@ -31,11 +31,11 @@ RecipePage.prototype = {
 
         const cardFront = document.createElement('div')
         cardFront.className = 'card-front'
-        cardFront.style = 'position: relative; height:100%; width:100%;'
+        cardFront.style = 'position: absolute; height:100%; width:100%;'
 
         const cardBack = document.createElement('div')
         cardBack.className = 'card-back'
-        cardBack.style  = 'position: relative; height:100%; width: 100%;'
+        cardBack.style  = 'position: absolute; height:100%; width: 100%;'
 
         this.cardTitleDiv.style = 'height:10%; text-align:center;'
         this.setTitle(title);
@@ -49,6 +49,7 @@ RecipePage.prototype = {
         this.addIngredients(ingredients)
         cardFront.append(this.ingredientsDiv)
 
+        this.descriptionDiv.style='margin:10px; padding:10px;'
         this.setDescription('bruh')
         cardBack.append(this.descriptionDiv)
 
@@ -85,7 +86,7 @@ RecipePage.prototype = {
 
     setDescription: function(description){
         this.description = description
-        this.descriptionDiv.innerHTML = 'description'
+        this.descriptionDiv.innerHTML = `${description}`
     },
 
 }
