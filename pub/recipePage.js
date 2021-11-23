@@ -19,28 +19,39 @@ function RecipePage() {
 RecipePage.prototype = {
     
     makeCard: function(width, height, color, title, ingredients, description, image) {
-        this.ingredients = ingredients
         this.description = description
 
-        const card  = document.createElement('div');
-        card.style = `width: ${width}px; height: ${height}px; margin: 10px; background-color:${color}; border-radius:20px; box-shadow: 5px 10px 8px #888888; outline:1px solid black;`
+        const card  = document.createElement('div')
+        card.style = `width: ${width}px; height: ${height}px; margin: 10px; background-color:${color}; border-radius:20px; perspective: 1000px; box-shadow: 5px 10px 8px #888888; outline:1px solid black;`
+
+        const cardContainer = document.createElement('div')
+        cardContainer.style = 'position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d;'
+
+        const cardFront = document.createElement('div')
+        cardFront.className = 'card-front'
+        cardFront.style = 'position: absolute; width:100%; height:100%;'
+        cardFront.setAttribute('onMouseOver','console.log("mouseOver")')
+
+        const cardBack = document.createElement('div')
+        cardBack.classList = 'card-back'
 
         this.cardTitleDiv.style = 'height:10%; text-align:center;'
         this.setTitle(title);
-        card.append(this.cardTitleDiv)
+        cardFront.append(this.cardTitleDiv)
 
         this.imageDiv.style = 'height:40%; padding:5px;'
         this.setImage(image)
-        card.append(this.imageDiv)
+        cardFront.append(this.imageDiv)
 
-        this.ingredientsDiv.style='height:40%; background-color:Blue; padding:2px;'
-        //this.ingredientsDiv.innerHTML = ...
-        card.append(this.ingredientsDiv)
-
-
+        this.ingredientsDiv.style='height:40%; padding:2px;'
+        this.addIngredients(ingredients)
+        cardFront.append(this.ingredientsDiv)
 
         this.cards.push(card)
 
+        cardContainer.append(cardFront)
+
+        card.append(cardContainer)
         const body = document.querySelector('body')
         body.append(card)
     },
@@ -51,7 +62,14 @@ RecipePage.prototype = {
     },
 
     addIngredients: function(ingredients){
-        this.ingredients.append(ingredients)
+        this.ingredients.push(...ingredients)
+        const ingredientsList = document.createElement("ul")
+        ingredientsList.style = "list-style-type: none; columns=2; -webkit-columns: 2; -moz-columns: 2;"
+        ingredientsList.innerHTML = this.ingredients.map(function(ingredient){
+            console.log(ingredient)
+            return '<li><input type="checkbox">' + ingredient + '</li>';
+        }).join('');
+        this.ingredientsDiv.append(ingredientsList)
     },
 
     setImage: function(source){
