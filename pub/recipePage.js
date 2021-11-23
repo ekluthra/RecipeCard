@@ -22,18 +22,20 @@ RecipePage.prototype = {
         this.description = description
 
         const card  = document.createElement('div')
-        card.style = `width: ${width}px; height: ${height}px; margin: 10px; background-color:${color}; border-radius:20px; perspective: 1000px; box-shadow: 5px 10px 8px #888888; outline:1px solid black;`
+        card.classList.add('card')
+        card.setAttribute('onClick', 'flipCard()')
 
         const cardContainer = document.createElement('div')
-        cardContainer.style = 'position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d;'
+        cardContainer.style = `width: ${width}px; height: ${height}px; margin: 10px; background-color:${color}; border-radius:20px; box-shadow: 5px 10px 8px #888888; outline:1px solid black;`
+        cardContainer.classList.add('card-container') 
 
         const cardFront = document.createElement('div')
         cardFront.className = 'card-front'
-        cardFront.style = 'position: absolute; width:100%; height:100%;'
-        cardFront.setAttribute('onMouseOver','console.log("mouseOver")')
+        cardFront.style = 'position: relative; height:100%; width:100%;'
 
         const cardBack = document.createElement('div')
-        cardBack.classList = 'card-back'
+        cardBack.className = 'card-back'
+        cardBack.style  = 'position: relative; height:100%; width: 100%;'
 
         this.cardTitleDiv.style = 'height:10%; text-align:center;'
         this.setTitle(title);
@@ -47,13 +49,17 @@ RecipePage.prototype = {
         this.addIngredients(ingredients)
         cardFront.append(this.ingredientsDiv)
 
+        this.setDescription('bruh')
+        cardBack.append(this.descriptionDiv)
+
+        card.append(cardFront)
+        card.append(cardBack)
+        cardContainer.append(card)
+
         this.cards.push(card)
 
-        cardContainer.append(cardFront)
-
-        card.append(cardContainer)
         const body = document.querySelector('body')
-        body.append(card)
+        body.append(cardContainer)
     },
 
     setTitle: function(title){
@@ -79,8 +85,14 @@ RecipePage.prototype = {
 
     setDescription: function(description){
         this.description = description
-    }
+        this.descriptionDiv.innerHTML = 'description'
+    },
 
+}
+
+// flipping functionality reference used: https://jsfiddle.net/james2doyle/qsQun/
+function flipCard() {
+    $('.card').toggleClass('flipped');
 }
 
 
