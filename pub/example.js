@@ -3,7 +3,7 @@
 const rp = new RecipePage()
 rp.makeCard(300, 340, '#FFF7DD', 'Pesto Pasta', ['Chicken Breast', 'Spaghetti', 'Tomato Sauce', 'Mozarella Cheese', 'Cilantro'])
 rp.setTitle('Chicken Parmasean') //This allows the developer to be able to change the title if they want to.
-rp.setImage('../pub/images/chicken-parmesan.jpg') // as well as changing the image 
+rp.setImage('/pub/images/chicken-parmesan.jpg') // as well as changing the image 
 //I wanted a separate function for setting the description because putting the description in the makeCard function as an argument would
 //result in a very large line that doesn't look easy to read for developers
 
