@@ -19,8 +19,6 @@ function RecipePage() {
 RecipePage.prototype = {
     
     makeCard: function(width, height, color, title, ingredients, description, image) {
-        this.description = description
-
         const card  = document.createElement('div')
         card.classList.add('card')
         card.setAttribute('onClick', 'flipCard()')
@@ -50,7 +48,7 @@ RecipePage.prototype = {
         cardFront.append(this.ingredientsDiv)
 
         this.descriptionDiv.style='margin:10px; padding:10px;'
-        this.setDescription('bruh')
+        this.setDescription(description)
         cardBack.append(this.descriptionDiv)
 
         card.append(cardFront)
@@ -73,7 +71,6 @@ RecipePage.prototype = {
         const ingredientsList = document.createElement("ul")
         ingredientsList.style = "list-style-type: none; columns=2; -webkit-columns: 2; -moz-columns: 2;"
         ingredientsList.innerHTML = this.ingredients.map(function(ingredient){
-            console.log(ingredient)
             return '<li><input type="checkbox">' + ingredient + '</li>';
         }).join('');
         this.ingredientsDiv.append(ingredientsList)
