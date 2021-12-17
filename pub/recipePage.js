@@ -1,13 +1,17 @@
 "use strict";
 
+let numRecipes = 0;
+const recipePages = [];
+
+
 function RecipePage() {
     
-    this.cards = []
     this.flippable = true
     this.title = ""
     this.ingredients = []
     this.description = ""
     this.image = ""
+    this.id = numRecipes;
 
     this.cardTitleDiv = document.createElement('div')
     this.ingredientsDiv = document.createElement('div')
@@ -21,7 +25,8 @@ RecipePage.prototype = {
     makeCard: function(width, height, color, title, ingredients, description, image) {
         const card  = document.createElement('div')
         card.classList.add('card')
-        card.setAttribute('onClick', 'flipCard()')
+        card.classList.add(`cardId-${this.id}`)
+        card.setAttribute('onClick', `flipCard(${this.id})`)
 
         const cardContainer = document.createElement('div')
         cardContainer.style = `width: ${width}px; height: ${height}px; margin: 10px; background-color:${color}; border-radius:20px; box-shadow: 5px 10px 8px #888888; outline:1px solid black;`
@@ -55,10 +60,14 @@ RecipePage.prototype = {
         card.append(cardBack)
         cardContainer.append(card)
 
-        this.cards.push(card)
+        recipePages.push(card)
 
         const body = document.querySelector('body')
         body.append(cardContainer)
+        numRecipes++;
+        console.log(this.id)
+        console.log(numRecipes)
+        console.log(recipePages)
     },
 
     setTitle: function(title){
@@ -89,8 +98,8 @@ RecipePage.prototype = {
 }
 
 // flipping functionality reference used: https://jsfiddle.net/james2doyle/qsQun/
-function flipCard() {
-    $('.card').toggleClass('flipped');
+function flipCard(cardId) {
+    $(`.cardId-${cardId}`).toggleClass('flipped');
 }
 
 
