@@ -12,11 +12,13 @@ function RecipePage() {
     this.description = ""
     this.image = ""
     this.id = numRecipes;
+    this.tags = []
 
     this.cardTitleDiv = document.createElement('div')
     this.ingredientsDiv = document.createElement('div')
     this.descriptionDiv = document.createElement('div')
     this.imageDiv = document.createElement('div')
+    this.tagsDiv = document.createElement('div')
 
 }
 
@@ -48,8 +50,9 @@ RecipePage.prototype = {
         this.setImage(image)
         cardFront.append(this.imageDiv)
 
-        this.ingredientsDiv.style='height:40%; padding:2px;'
+        this.ingredientsDiv.style='max-height:40%; padding:2px;'
         this.addIngredients(ingredients)
+        this.ingredientsDiv.setAttribute('onClick', 'event.stopPropagation();')
         cardFront.append(this.ingredientsDiv)
 
         this.descriptionDiv.style='margin:10px; padding:10px;'
@@ -101,5 +104,3 @@ RecipePage.prototype = {
 function flipCard(cardId) {
     $(`.cardId-${cardId}`).toggleClass('flipped');
 }
-
-
