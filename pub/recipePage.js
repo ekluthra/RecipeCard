@@ -1,5 +1,6 @@
 "use strict";
 
+(function(global, document, $) { 
 //numRecipes: keeps track of the number of recipepages on screen
 let numRecipes = 0;
 //a list of recipepages
@@ -57,7 +58,7 @@ RecipePage.prototype = {
         card.classList.add('card')
         card.classList.add(`cardId-${this.id}`);
         if(this.flippable){
-            card.setAttribute('onClick', `flipCard(${this.id})`)
+            card.setAttribute('onClick', `rp.flipCard(${this.id})`)
         }
 
         const cardContainer = document.createElement('div')
@@ -173,20 +174,26 @@ RecipePage.prototype = {
         this.descriptionDiv.innerHTML = `${description}`
     },
 
+    // flipping functionality reference used: https://jsfiddle.net/james2doyle/qsQun/
+    /**
+     * flip a card that is clicked on
+     * @param {int} cardId - id of the card to flip
+     */
+    flipCard: function(cardId) {
+        $(`.cardId-${cardId}`).toggleClass('flipped');
+    },
+    /**
+     * all the cards to a color
+     * @param {string} theme - color to set the cards to
+     */
+    setTheme: function(theme) {
+        $('.card-container').css('background-color', theme);
+    }
+
 }
 
-// flipping functionality reference used: https://jsfiddle.net/james2doyle/qsQun/
-/**
- * flip a card that is clicked on
- * @param {int} cardId - id of the card to flip
- */
-function flipCard(cardId) {
-    $(`.cardId-${cardId}`).toggleClass('flipped');
-}
-/**
- * all the cards to a color
- * @param {string} theme - color to set the cards to
- */
-function setTheme(theme) {
-    $('.card-container').css('background-color', theme);
-}
+
+
+global.RecipePage = global.RecipePage || RecipePage
+
+})(window, window.document, $); 
