@@ -9,7 +9,7 @@ function call, keeping the code cleaner and easier to read.
 const rp = new RecipePage()
 rp.makeCard(300, 340, '#FFF7DD', '', [],"","", [], 'example1')
 rp.setTitle('Chicken Parmasean') //This allows the developer to be able to change the title if they want to.
-rp.setImage('https://secret-sands-52672.herokuapp.com/images/chicken-parmesan.jpg') // as well as changing the image 
+rp.setImage('https://www.eatwell101.com/wp-content/uploads/2018/09/parmesan-chicken-casserole-recipe-12.jpg') // as well as changing the image 
 //I wanted a separate function for setting the description because putting the description in the makeCard function as an argument would
 //result in a very large line that doesn't look easy to read for developers
 rp.addIngredients(['Chicken Breast', 'Spaghetti', 'Tomato Sauce', 'Mozarella Cheese', 'Cilantro'])
@@ -29,4 +29,4 @@ the last parameter is false, and you cannot flip the card on the
 DOM, so the description of the recipe is on the front of the card*/
 const rp3 = new RecipePage()
 
-rp3.makeCard(300,600,' #ccff99', 'Butter Chicken', ['Chicken Thigh', 'Plain Yogurt', 'Garlic', 'Turmuric', 'Salt', 'Chili Powder', 'Cumin'], 'Mix chicken with all ingredients for the chicken marinade. Heat butter or ghee in the same pan. Fry the onions. Add crushed tomatoes, chili powder and salt. Blend mixture. Pour onto cooked chicken', 'https://secret-sands-52672.herokuapp.com/images/butter-chicken.jpg', ['spicy'], 'example3', false)
+rp3.makeCard(300,600,' #ccff99', 'Butter Chicken', ['Chicken Thigh', 'Plain Yogurt', 'Garlic', 'Turmuric', 'Salt', 'Chili Powder', 'Cumin'], 'Mix chicken with all ingredients for the chicken marinade. Heat butter or ghee in the same pan. Fry the onions. Add crushed tomatoes, chili powder and salt. Blend mixture. Pour onto cooked chicken', 'https://c.ndtvimg.com/2021-08/0okn1nfo_butter-chicken-meatballs_625x300_04_August_21.jpg', ['spicy'], 'example3', false)

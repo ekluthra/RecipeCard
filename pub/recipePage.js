@@ -123,10 +123,10 @@ RecipePage.prototype = {
             this.tags.push(tag)
             const tagDiv = document.createElement('div')
             if(tag==='spicy'){
-                tagDiv.innerHTML = '<img src = "./images/spicy.png" style="width:35px; float:left; margin:5px;"/>'
+                tagDiv.innerHTML = '<img src = "/images/spicy.png" style="width:35px; float:left; margin:5px;"/>'
             }
             if(tag==='vegetarian'){
-                tagDiv.innerHTML = '<img src = "./images/vegetarian.png" style="width:35px; float:left; margin:5px;"/>'
+                tagDiv.innerHTML = '<img src = "/images/vegetarian.png" style="width:35px; float:left; margin:5px;"/>'
             }
             this.tagsDiv.append(tagDiv)
         }.bind(this));
