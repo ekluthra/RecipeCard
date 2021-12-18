@@ -1,9 +1,19 @@
 "use strict";
 
+//numRecipes: keeps track of the number of recipepages on screen
 let numRecipes = 0;
+//a list of recipepages
 const recipePages = [];
 
-
+/** The RecipePage object 
+ * flippable: determines if the recipe page is flippable. True by default
+ * title: name of the recipe
+ * ingredients: a list of ingredients
+ * description: description of the recipe
+ * image: an image of the recipe
+ * id: the id of the RecipePage
+ * tags: optional list of tags to add to the bottom of the RecipePage
+ */
 function RecipePage() {
     
     this.flippable = true
@@ -22,8 +32,24 @@ function RecipePage() {
 
 }
 
+/**
+ * RecipePage prototype
+ */
 RecipePage.prototype = {
     
+    /**
+     * 
+     * @param {integer} width - desired width of recipepage, in pixels
+     * @param {integer} height - desired height of recipepage, in pixels
+     * @param {string} color - color of recipepage
+     * @param {string} title - name of recipe
+     * @param {array} ingredients - list of ingredients needed
+     * @param {string} description - description of recipe
+     * @param {string} image - an image of recipe
+     * @param {array} tags - tags associated with recipe. Two options are 'vegeterian' and 'spicy'
+     * @param {string} parent - id of parent element that recipe should belong to
+     * @param {boolean} flippable - whether the card should be flippable
+     */
     makeCard: function(width, height, color, title, ingredients, description, image, tags, parent, flippable=true) {
         this.flippable = flippable
 
@@ -67,9 +93,12 @@ RecipePage.prototype = {
         this.addTags(tags);
         (this.flippable ? cardFront.append(this.tagsDiv) : unflippableFront.append(this.tagsDiv))
 
-        this.descriptionDiv.style='margin:10px; padding:10px;'
+        if(this.flippable){
+            this.descriptionDiv.style='margin:10px; padding:10px;'
+        }
         this.setDescription(description);
         (this.flippable ? cardBack.append(this.descriptionDiv) : unflippableFront.append(this.descriptionDiv))
+
         if(this.flippable){
             card.append(cardFront)
             card.append(cardBack)
@@ -85,7 +114,10 @@ RecipePage.prototype = {
         body.append(cardContainer)
         numRecipes++;
     },
-
+    /**
+     * 
+     * @param {array} tags - list of tags (strings)
+     */
     addTags: function(tags){
         tags.forEach(function(tag){
             this.tags.push(tag)
@@ -100,12 +132,19 @@ RecipePage.prototype = {
         }.bind(this));
     },
 
+    /**
+     * 
+     * @param {string} title - title of recipe
+     */
     setTitle: function(title){
         this.title=title
         this.cardTitleDiv.innerHTML = `<h3> ${title} </h3>`
     },
 
-    
+    /**
+     * 
+     * @param {array} ingredients - list of ingredients
+     */
     addIngredients: function(ingredients){
         this.ingredients.push(...ingredients)
         const ingredientsList = document.createElement("ul")
@@ -116,11 +155,19 @@ RecipePage.prototype = {
         this.ingredientsDiv.append(ingredientsList)
     },
 
+    /**
+     * 
+     * @param {string} source - source of image
+     */
     setImage: function(source){
         this.image = source
         this.imageDiv.innerHTML = `<img src = '${source}' style="max-width:100%; max-height:100%; display:block; margin:auto;"/>`
     },
 
+    /**
+     * 
+     * @param {string} description - description of how to make recipe
+     */
     setDescription: function(description){
         this.description = description
         this.descriptionDiv.innerHTML = `${description}`
@@ -129,10 +176,17 @@ RecipePage.prototype = {
 }
 
 // flipping functionality reference used: https://jsfiddle.net/james2doyle/qsQun/
+/**
+ * flip a card that is clicked on
+ * @param {int} cardId - id of the card to flip
+ */
 function flipCard(cardId) {
     $(`.cardId-${cardId}`).toggleClass('flipped');
 }
-
+/**
+ * all the cards to a color
+ * @param {string} theme - color to set the cards to
+ */
 function setTheme(theme) {
     $('.card-container').css('background-color', theme);
 }
