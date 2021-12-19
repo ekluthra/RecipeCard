@@ -1,5 +1,6 @@
 # Welcome to RecipeCard!
 ### Landing page: https://secret-sands-52672.herokuapp.com/
+#### As a sidenode, please try to use chrome to open the landing page, as some of the animations are unavailable/buggy on other browsers
 ### Documentation page: https://blooming-coast-64063.herokuapp.com/
 
 ### Getting Started:
